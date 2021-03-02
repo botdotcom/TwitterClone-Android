@@ -10,6 +10,7 @@ import java.util.List;
 public class Tweet {
     private String body;
     private String createdAt;
+    private long id;
     private User user;
 
     public void setBody(String body) {
@@ -24,6 +25,10 @@ public class Tweet {
         this.user = user;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getBody() {
         return body;
     }
@@ -36,12 +41,17 @@ public class Tweet {
         return user;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
 
         tweet.setBody(jsonObject.getString("text"));
         tweet.setCreatedAt(jsonObject.getString("created_at"));
         tweet.setUser(User.fromJson(jsonObject.getJSONObject("user")));
+        tweet.setId(jsonObject.getLong("id"));
 
         return tweet;
     }
