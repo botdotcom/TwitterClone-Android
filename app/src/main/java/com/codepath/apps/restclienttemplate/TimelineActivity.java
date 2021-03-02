@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import okhttp3.Headers;
 public class TimelineActivity extends AppCompatActivity {
     TwitterClient twitterClient;
     RecyclerView tweetsRecyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
     List<Tweet> tweets;
     TweetsAdapter tweetsAdapter;
     private static final String ACTIVITY_TAG = "TimelineActivity";
@@ -34,6 +36,16 @@ public class TimelineActivity extends AppCompatActivity {
 
         // find recycler view
         tweetsRecyclerView = findViewById(R.id.tweets_recycler_view);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_container);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(ACTIVITY_TAG, "onRefresh: success");
+                populateHomeTimeline();
+            }
+        });
 
         // init list of tweets and adapter
         tweets = new ArrayList<>();
@@ -53,8 +65,11 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(ACTIVITY_TAG, "onSuccess");
                 JSONArray jsonArray = json.jsonArray;
                 try {
-                    tweets.addAll(Tweet.fromJsonArray(jsonArray));
-                    tweetsAdapter.notifyDataSetChanged();
+                    tweetsAdapter.clear();
+                    tweetsAdapter.addAll(Tweet.fromJsonArray(jsonArray));
+
+                    // signal that refresh has finished
+                    swipeRefreshLayout.setRefreshing(false);
                 } catch (JSONException e) {
                     Log.e(ACTIVITY_TAG, "JSON exception", e);
                 }
