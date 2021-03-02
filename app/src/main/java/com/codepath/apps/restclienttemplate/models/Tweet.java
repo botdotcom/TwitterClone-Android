@@ -1,11 +1,16 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.text.format.DateUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Tweet {
     private String body;
@@ -49,7 +54,7 @@ public class Tweet {
         Tweet tweet = new Tweet();
 
         tweet.setBody(jsonObject.getString("text"));
-        tweet.setCreatedAt(jsonObject.getString("created_at"));
+        tweet.setCreatedAt(getRelativeTimeAgo(jsonObject.getString("created_at")));
         tweet.setUser(User.fromJson(jsonObject.getJSONObject("user")));
         tweet.setId(jsonObject.getLong("id"));
 
@@ -64,5 +69,21 @@ public class Tweet {
         }
 
         return tweets;
+    }
+
+    public static String getRelativeTimeAgo(String rawJsonDate) {
+        String twitterDateTimeFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(twitterDateTimeFormat, Locale.ENGLISH);
+        simpleDateFormat.setLenient(true);
+
+        String relativeDateTime = "";
+        try {
+            long dateInMillis = simpleDateFormat.parse(rawJsonDate).getTime();
+            relativeDateTime = DateUtils.getRelativeTimeSpanString(dateInMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return relativeDateTime;
     }
 }
