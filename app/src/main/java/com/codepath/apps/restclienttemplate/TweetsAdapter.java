@@ -80,7 +80,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tweetBodyTextView.setText(tweet.getBody());
             nameTextView.setText(tweet.getUser().getName());
             screenNameTextView.setText("@" + tweet.getUser().getScreenName());
-            createdAtTextView.setText(" . " + tweet.getCreatedAt());
+            createdAtTextView.setText(". " + tweet.getCreatedAt());
             Glide.with(context).load(tweet.getUser().getProfileImageUrl()).apply(RequestOptions.circleCropTransform()).into(profileImageView);
         }
     }

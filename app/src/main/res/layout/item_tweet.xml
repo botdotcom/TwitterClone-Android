@@ -37,9 +37,11 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/profile_image_view"
-        android:text="What an amazing move!"
+        android:autoLink="all"
+        android:linksClickable="true"
         android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="What an amazing move!" />
 
     <TextView
         android:id="@+id/screenname_text_view"
@@ -62,6 +64,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/screenname_text_view"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
         tools:text=". 4h" />
