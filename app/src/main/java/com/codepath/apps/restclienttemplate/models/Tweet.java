@@ -2,6 +2,12 @@ package com.codepath.apps.restclienttemplate.models;
 
 import android.text.format.DateUtils;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,11 +20,29 @@ import java.util.List;
 import java.util.Locale;
 
 @Parcel
+@Entity(foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "userId"))
 public class Tweet {
-    private String body;
-    private String createdAt;
+    @ColumnInfo
+    @PrimaryKey
     private long id;
+
+    @ColumnInfo
+    private String body;
+
+    @ColumnInfo
+    private String createdAt;
+
+    @Ignore
     private User user;
+
+    @ColumnInfo
+    private long userId;
+
+    @ColumnInfo
+    private int retweets;
+
+    @ColumnInfo
+    private int favorites;
 
     // for Parceler
     public Tweet() {}
@@ -39,6 +63,22 @@ public class Tweet {
         this.id = id;
     }
 
+    public void setRetweets(int retweets) {
+        this.retweets = retweets;
+    }
+
+    public void setFavorites(int favorites) {
+        this.favorites = favorites;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
     public String getBody() {
         return body;
     }
@@ -55,13 +95,26 @@ public class Tweet {
         return id;
     }
 
+    public int getRetweets() {
+        return retweets;
+    }
+
+    public int getFavorites() {
+        return favorites;
+    }
+
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
 
         tweet.setBody(jsonObject.getString("text"));
         tweet.setCreatedAt(getRelativeTimeAgo(jsonObject.getString("created_at")));
-        tweet.setUser(User.fromJson(jsonObject.getJSONObject("user")));
+//        tweet.setUser(User.fromJson(jsonObject.getJSONObject("user")));
+        User user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.setUser(user);
+        tweet.setUserId(user.getId());
         tweet.setId(jsonObject.getLong("id"));
+        tweet.setRetweets(jsonObject.getInt("retweet_count"));
+        tweet.setFavorites(jsonObject.getInt("favorite_count"));
 
         return tweet;
     }

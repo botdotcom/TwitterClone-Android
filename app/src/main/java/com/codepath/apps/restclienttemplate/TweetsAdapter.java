@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
@@ -66,6 +68,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView nameTextView;
         TextView screenNameTextView;
         TextView createdAtTextView;
+        TextView retweetCountTextView;
+        TextView favoriteCountTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +78,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);
             screenNameTextView = (TextView) itemView.findViewById(R.id.screenname_text_view);
             createdAtTextView = (TextView) itemView.findViewById(R.id.createdat_text_view);
+            retweetCountTextView = (TextView) itemView.findViewById(R.id.retweet_count_text_view);
+            favoriteCountTextView = (TextView) itemView.findViewById(R.id.favorite_count_text_view);
         }
 
         public void bind(Tweet tweet) {
@@ -81,6 +87,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             nameTextView.setText(tweet.getUser().getName());
             screenNameTextView.setText("@" + tweet.getUser().getScreenName());
             createdAtTextView.setText(". " + tweet.getCreatedAt());
+            retweetCountTextView.setText(String.valueOf(tweet.getRetweets()));
+            favoriteCountTextView.setText(String.valueOf(tweet.getFavorites()));
             Glide.with(context).load(tweet.getUser().getProfileImageUrl()).apply(RequestOptions.circleCropTransform()).into(profileImageView);
         }
     }

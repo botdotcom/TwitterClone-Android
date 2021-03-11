@@ -73,7 +73,7 @@
     <RelativeLayout
         android:id="@+id/tweet_actions_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
         android:layout_below="@+id/tweet_body_text_view"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@+id/profile_image_view">
@@ -81,27 +81,56 @@
         <ImageView
             android:id="@+id/comment_tweet_image_view"
             android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/ic_vector_comment_icon_old"
+            app:srcCompat="@drawable/ic_twitter_icon_comment_old"
             app:tint="@color/dark_gray" />
 
         <ImageView
             android:id="@+id/retweet_tweet_image_view"
             android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="35dp"
             android:layout_toEndOf="@id/comment_tweet_image_view"
             app:srcCompat="@drawable/ic_vector_retweet_stroke"
             app:tint="@color/dark_gray" />
 
-        <ImageView
-            android:id="@+id/like_tweet_image_view"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="35dp"
+        <TextView
+            android:id="@+id/retweet_count_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
             android:layout_toEndOf="@id/retweet_tweet_image_view"
+            android:textColor="@color/dark_gray"
+            android:textSize="14sp"
+            tools:text="161" />
+
+        <ImageView
+            android:id="@+id/favorite_tweet_image_view"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="35dp"
+            android:layout_toEndOf="@id/retweet_count_text_view"
             app:srcCompat="@drawable/ic_vector_heart_stroke"
+            app:tint="@color/dark_gray" />
+
+        <TextView
+            android:id="@+id/favorite_count_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/favorite_tweet_image_view"
+            android:textColor="@color/dark_gray"
+            android:textSize="14sp"
+            tools:text="296" />
+
+        <ImageView
+            android:id="@+id/share_tweet_image_view"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="35dp"
+            android:layout_toEndOf="@id/favorite_count_text_view"
+            app:srcCompat="@drawable/ic_twitter_icon_share"
             app:tint="@color/dark_gray" />
 
     </RelativeLayout>
