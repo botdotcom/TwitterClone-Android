@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -11,11 +12,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +37,7 @@ public class TimelineActivity extends AppCompatActivity {
     List<Tweet> tweets;
     TweetsAdapter tweetsAdapter;
     EndlessRecyclerViewScrollListener scrollListener;
+    FloatingActionButton tweetComposeFloatingButton;
     private static final String ACTIVITY_TAG = "TimelineActivity";
     private final int REQUEST_CODE = 20;
 
@@ -43,8 +48,12 @@ public class TimelineActivity extends AppCompatActivity {
 
         twitterClient = TwitterApp.getRestClient(this);
 
+        tweetComposeFloatingButton = (FloatingActionButton) findViewById(R.id.tweet_compose_floating_button);
         // find recycler view
         tweetsRecyclerView = findViewById(R.id.tweets_recycler_view);
+//        DividerItemDecoration recyclerViewItemDecoration = new DividerItemDecoration(tweetsRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
+//        tweetsRecyclerView.addItemDecoration(recyclerViewItemDecoration);
+        tweetsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_container);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
 
@@ -77,6 +86,19 @@ public class TimelineActivity extends AppCompatActivity {
         tweetsRecyclerView.addOnScrollListener(scrollListener);
 
         populateHomeTimeline();
+
+        tweetComposeFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                composeTweet(null);
+            }
+        });
+    }
+
+    private void composeTweet(String tweetText) {
+        Intent intent = new Intent(this, ComposeActivity.class);
+        intent.putExtra("text", tweetText);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     private void loadMoreData() {
@@ -127,24 +149,24 @@ public class TimelineActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // inflate the menu --- adds items to action bar if present
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.compose_menu_button) {
-            // compose icon has been tapped
-            Intent intent = new Intent(this, ComposeActivity.class);
-            startActivityForResult(intent, REQUEST_CODE);
-            // navigate to compose activity
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // inflate the menu --- adds items to action bar if present
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.compose_menu_button) {
+//            // compose icon has been tapped
+//            Intent intent = new Intent(this, ComposeActivity.class);
+//            startActivityForResult(intent, REQUEST_CODE);
+//            // navigate to compose activity
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
