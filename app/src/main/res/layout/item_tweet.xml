@@ -83,7 +83,7 @@
             android:layout_width="18dp"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/ic_twitter_icon_comment_old"
+            app:srcCompat="@drawable/ic_twitter_comment"
             app:tint="@color/dark_gray" />
 
         <ImageView
