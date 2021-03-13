@@ -2,7 +2,7 @@
 
 **Twitter Clone** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public). It is built as a learning exercise.
 
-Time spent: **10** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -54,11 +54,11 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-Video Walkthrough 2
+**Video Walkthrough 2**
 
 <img src='https://i.imgur.com/d8OzS3B.gif' title='Twitter Clone Video Walkthrough 2' width='' alt='Twitter Clone Video Walkthrough 2' />
 
-Video Walkthrough 1
+**Video Walkthrough 1**
 
 <img src='https://i.imgur.com/9KxdN6W.gif' title='Twitter Clone Video Walkthrough 1' width='' alt='Twitter Clone Video Walkthrough 1' />
 
