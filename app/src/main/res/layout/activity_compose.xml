@@ -6,37 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".ComposeActivity">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tweet_body_compose_textlayout"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/compose_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="280">
+            app:navigationIcon="@drawable/ic_vector_close"
+            >
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tweet_body_compose_edittext"
+                <Button
+                    android:id="@+id/tweet_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/rounded_button_twitter_blue"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/tweet_label"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:id="@+id/compose_relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/compose_toolbar"
+            >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tweet_body_compose_textlayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/new_tweet"
-                    android:inputType="textMultiLine"
-                    android:gravity="start|top"
-                    android:minLines="5"
-                    android:textColorHighlight="@color/twitter_blue" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="280">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tweet_body_compose_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/new_tweet"
+                            android:inputType="textMultiLine"
+                            android:gravity="start|top"
+                            android:minLines="5"
+                            android:textColorHighlight="@color/twitter_blue" />
 
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/tweet_button"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_below="@+id/tweet_body_compose_textlayout"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/rounded_button_twitter_blue"
-            android:text="@string/tweet_label"
-            android:textColor="@color/white" />
+        </RelativeLayout>
+
+<!--        android:layout_below="@+id/tweet_body_compose_textlayout"-->
 
 </RelativeLayout>

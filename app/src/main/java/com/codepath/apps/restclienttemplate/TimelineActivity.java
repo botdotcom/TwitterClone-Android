@@ -54,11 +54,9 @@ public class TimelineActivity extends AppCompatActivity {
         twitterClient = TwitterApp.getRestClient(this);
         tweetDao = ((TwitterApp) getApplicationContext()).getMyDatabase().tweetDao();
 
-        tweetComposeFloatingButton = (FloatingActionButton) findViewById(R.id.tweet_compose_floating_button);
+        tweetComposeFloatingButton = findViewById(R.id.tweet_compose_floating_button);
         // find recycler view
         tweetsRecyclerView = findViewById(R.id.tweets_recycler_view);
-//        DividerItemDecoration recyclerViewItemDecoration = new DividerItemDecoration(tweetsRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
-//        tweetsRecyclerView.addItemDecoration(recyclerViewItemDecoration);
         tweetsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_container);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);

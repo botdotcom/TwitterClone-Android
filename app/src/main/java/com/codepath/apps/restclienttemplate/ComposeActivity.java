@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -29,6 +31,7 @@ public class ComposeActivity extends AppCompatActivity {
     TextInputLayout tweetBodyTextInputLayout;
     TextInputEditText tweetBodyComposeEditText;
     Button tweetButton;
+    androidx.appcompat.widget.Toolbar composeToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,9 @@ public class ComposeActivity extends AppCompatActivity {
         tweetBodyTextInputLayout = findViewById(R.id.tweet_body_compose_textlayout);
         tweetBodyComposeEditText = findViewById(R.id.tweet_body_compose_edittext);
         tweetButton = findViewById(R.id.tweet_button);
+        composeToolbar = findViewById(R.id.compose_toolbar);
+        setSupportActionBar(composeToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // set click listener on the button
         tweetButton.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +53,6 @@ public class ComposeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // check tweet body for errors
                 final String tweetBodyContent = tweetBodyComposeEditText.getText().toString();
-
 
                 if (tweetBodyContent.isEmpty()) {
                     Toast.makeText(ComposeActivity.this, "Sorry, tweet cannot be empty", Toast.LENGTH_LONG).show();
@@ -81,5 +86,16 @@ public class ComposeActivity extends AppCompatActivity {
                 }, tweetBodyContent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 }
