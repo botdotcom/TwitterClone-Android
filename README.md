@@ -36,6 +36,7 @@ The following **optional** features are implemented:
 - [ ] On the Twitter timeline, leverage the CoordinatorLayout to apply scrolling behavior that hides / shows the toolbar.
 
 2.
+- [x] User is using **"Twitter branded" colors and styles**
 - [ ] User can **select "reply" from detail view to respond to a tweet**
 - [x] The "Compose" action is moved to a FloatingActionButton instead of on the AppBar
 - [ ] Compose tweet functionality is build using modal overlay
@@ -53,7 +54,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/9KxdN6W.gif' title='Twitter Clone Video Walkthrough' width='' alt='Twitter Clone Video Walkthrough' />
+Video Walkthrough 2
+
+<img src='https://i.imgur.com/d8OzS3B.gif' title='Twitter Clone Video Walkthrough 2' width='' alt='Twitter Clone Video Walkthrough 2' />
+
+Video Walkthrough 1
+
+<img src='https://i.imgur.com/9KxdN6W.gif' title='Twitter Clone Video Walkthrough 1' width='' alt='Twitter Clone Video Walkthrough 1' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
